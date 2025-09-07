@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, ArrowRight, Building2, Wrench, CalendarDays, MapPin, Users, MessageSquare, BookOpen, Coffee, Heart, Star, Zap, Globe } from "lucide-react";
+import { ArrowUpRight, ArrowRight, Building2, Wrench, Users, MessageSquare, BookOpen, Coffee, Heart, Star, Zap } from "lucide-react";
 
 /**
  * Campus Landing — Minimal Cinematic Flow (v5, bugfix + handwriting theme)
@@ -128,45 +128,6 @@ function Typewriter({
   );
 }
 
-// ---------- Events Panel (Left) ----------
-function EventsPanel() {
-  const items = [
-    { title: "Freshers' Mixer", when: "Thu 7:00 PM", where: "Atrium" },
-    { title: "24h Hack Night", when: "Fri 6:00 PM", where: "Lab 3" },
-    { title: "Career Coffee Chat", when: "Mon 4:00 PM", where: "Café 2" },
-  ];
-  return (
-    <div
-      className="rounded-2xl border border-zinc-300 p-4 md:p-5 w-full shadow-sm"
-      style={{
-        backgroundImage:
-          "repeating-linear-gradient(0deg, rgba(0,0,0,0.04) 0px, rgba(0,0,0,0.04) 1px, transparent 1px, transparent 30px), linear-gradient(90deg, rgba(244,63,94,0.18) 56px, transparent 56px)",
-        backgroundSize: "auto, auto",
-        backgroundColor: "#fff",
-      }}
-    >
-      <div className="flex items-center gap-2 mb-3" style={{ fontFamily: 'Gloria Hallelujah, Patrick Hand, system-ui' }}>
-        <CalendarDays className="size-5" />
-        <h3 className="text-lg font-semibold tracking-tight">Events</h3>
-      </div>
-      <ul className="space-y-2" style={{ fontFamily: 'Patrick Hand, system-ui' }}>
-        {items.map((e, i) => (
-          <li key={i} className="flex items-start gap-3 text-[0.95rem]">
-            <div className="mt-1 h-2 w-2 rounded-full bg-zinc-900/70" />
-            <div>
-              <p className="leading-tight" style={{ fontFamily: 'Gloria Hallelujah, Patrick Hand, system-ui' }}>{e.title}</p>
-              <p className="text-zinc-700 flex items-center gap-2 leading-tight">
-                <span>{e.when}</span>
-                <span>·</span>
-                <span className="inline-flex items-center gap-1"><MapPin className="size-3" />{e.where}</span>
-              </p>
-            </div>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
 
 // ---------- Mobile App Demo (Centered Phone Outline) ----------
 function MobileAppDemo({ play }: { play: boolean }) {
