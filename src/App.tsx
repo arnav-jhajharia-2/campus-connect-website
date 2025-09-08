@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, ArrowRight, Building2, Wrench, Users, MessageSquare, BookOpen, Coffee, Heart, Star, Zap } from "lucide-react";
+import { ArrowUpRight, ArrowRight, Building2, Wrench, Users, MessageSquare, BookOpen, Coffee, Heart, Star, Zap, X, Check, XCircle } from "lucide-react";
 
 /**
  * Campus Landing — Minimal Cinematic Flow (v5, bugfix + handwriting theme)
@@ -149,7 +149,7 @@ function MobileAppDemo({ play }: { play: boolean }) {
           muted
           playsInline
           controls
-          src="https://cdn.coverr.co/videos/coverr-scrolling-a-smartphone-while-standing-0789/1080p.mp4"
+          src="https://res.cloudinary.com/dppdu4sip/video/upload/v1757312625/My_Movie_2_wx05ra.mp4"
           poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 19'%3E%3C/svg%3E"
           className="absolute inset-0 h-full w-full object-cover"
         />
@@ -201,12 +201,162 @@ function OptionCard({
   );
 }
 
+// ---------- Pros and Cons Modal ----------
+function ProsConsModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      {/* Backdrop */}
+      <div 
+        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+        onClick={onClose}
+      />
+      
+      {/* Modal */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.9, y: 20 }}
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        className="relative w-full max-w-4xl bg-white rounded-3xl shadow-2xl border border-zinc-200"
+        style={{ fontFamily: 'Patrick Hand, system-ui' }}
+      >
+        {/* Header */}
+        <div className="p-6 border-b border-zinc-200">
+          <div className="flex items-center justify-between">
+            <h2 className="text-2xl font-semibold" style={{ fontFamily: 'Gloria Hallelujah, Patrick Hand, system-ui' }}>
+              Which option is right for you?
+            </h2>
+            <button
+              onClick={onClose}
+              className="p-2 hover:bg-zinc-100 rounded-full transition-colors"
+            >
+              <X className="size-5" />
+            </button>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="p-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Main Website */}
+            <div className="p-6 border-2 border-blue-200 rounded-2xl bg-blue-50/50">
+              <div className="text-center mb-6">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-medium mb-3">
+                  <Building2 className="size-4" />
+                  Main Website
+                </div>
+                <p className="text-blue-600 font-medium">Join existing community</p>
+              </div>
+
+              <div className="space-y-4">
+                <div>
+                  <h3 className="font-semibold text-green-700 mb-2 flex items-center gap-2" style={{ fontFamily: 'Gloria Hallelujah, Patrick Hand, system-ui' }}>
+                    <Check className="size-4" />
+                    Good for:
+                  </h3>
+                  <ul className="text-sm text-zinc-700 space-y-1">
+                    <li>• Start immediately</li>
+                    <li>• No technical skills needed</li>
+                    <li>• Join 50K+ students</li>
+                    <li>• Get support & updates</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-red-700 mb-2 flex items-center gap-2" style={{ fontFamily: 'Gloria Hallelujah, Patrick Hand, system-ui' }}>
+                    <XCircle className="size-4" />
+                    Trade-offs:
+                  </h3>
+                  <ul className="text-sm text-zinc-700 space-y-1">
+                    <li>• Less customization</li>
+                    <li>• $29/month cost</li>
+                    <li>• Shared platform</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="mt-6">
+                <a
+                  href="#main-site"
+                  className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 bg-blue-600 text-white rounded-xl font-medium hover:bg-blue-700 transition-colors"
+                >
+                  Choose Main Website
+                  <ArrowRight className="size-4" />
+                </a>
+              </div>
+            </div>
+
+            {/* Custom Version */}
+            <div className="p-6 border-2 border-purple-200 rounded-2xl bg-purple-50/50">
+              <div className="text-center mb-6">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-100 text-purple-700 rounded-full text-sm font-medium mb-3">
+                  <Wrench className="size-4" />
+                  Custom Version
+                </div>
+                <p className="text-purple-600 font-medium">Build your own</p>
+              </div>
+
+              <div className="space-y-4">
+                <div>
+                  <h3 className="font-semibold text-green-700 mb-2 flex items-center gap-2" style={{ fontFamily: 'Gloria Hallelujah, Patrick Hand, system-ui' }}>
+                    <Check className="size-4" />
+                    Good for:
+                  </h3>
+                  <ul className="text-sm text-zinc-700 space-y-1">
+                    <li>• Full control & customization</li>
+                    <li>• Your own branding</li>
+                    <li>• Free to use</li>
+                    <li>• Complete privacy</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-red-700 mb-2 flex items-center gap-2" style={{ fontFamily: 'Gloria Hallelujah, Patrick Hand, system-ui' }}>
+                    <XCircle className="size-4" />
+                    Trade-offs:
+                  </h3>
+                  <ul className="text-sm text-zinc-700 space-y-1">
+                    <li>• Need dev skills</li>
+                    <li>• Takes 2-4 weeks</li>
+                    <li>• You maintain it</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="mt-6">
+                <a
+                  href="#gitbook"
+                  className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 bg-purple-600 text-white rounded-xl font-medium hover:bg-purple-700 transition-colors"
+                >
+                  Choose Custom
+                  <ArrowRight className="size-4" />
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Simple Decision Helper */}
+          <div className="mt-8 p-4 bg-zinc-50 rounded-xl text-center">
+            <p className="text-sm text-zinc-600">
+              <strong>Quick tip:</strong> Choose Main Website if you want to start today. 
+              Choose Custom if you have developers and want full control.
+            </p>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  );
+}
+
 // ---------- Page ----------
 export default function CampusLanding() {
   useHandwrittenFont();
   const words = useMemo(() => ["feed", "events", "story", "lore"], []);
   const [phase, setPhase] = useState<"whatif" | "dots" | "typing">("whatif");
   const [dockLive, setDockLive] = useState(false);
+  const [showProsCons, setShowProsCons] = useState(false);
 
   
 
@@ -241,7 +391,7 @@ export default function CampusLanding() {
                     className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-medium"
                     style={{ fontFamily: 'Gloria Hallelujah, Patrick Hand, system-ui' }}
                   >
-                    what if you could have a platform for...
+                    what if you could have an open source platform for...
                   </motion.h1>
                 )}
                 {phase === "dots" && (
@@ -353,7 +503,7 @@ export default function CampusLanding() {
                 What makes CampusConnect special?
               </h2>
               <p className="text-zinc-700 max-w-2xl mx-auto" style={{ fontFamily: 'Patrick Hand, system-ui' }}>
-                Built by students, for students. Here's what makes our platform different.
+                Built by students, for students. The only platform where you can add your own features through code or our app!
               </p>
             </div>
 
@@ -375,53 +525,80 @@ export default function CampusLanding() {
                 </div>
               </div>
 
-              <div className="group relative p-6 rounded-2xl bg-white border border-zinc-200 shadow-sm hover:shadow-md transition-all">
-                <div className="absolute -top-2 -right-2 w-8 h-8 bg-pink-300/70 rounded-full -rotate-12" />
+              <div className="group relative p-6 rounded-2xl bg-gradient-to-br from-green-50 to-blue-50 border-2 border-green-200 shadow-lg hover:shadow-xl transition-all">
+                <div className="absolute -top-3 -right-3 w-10 h-10 bg-gradient-to-br from-green-300 to-blue-300 rounded-full -rotate-12" />
                 <div className="flex items-start gap-4">
-                  <div className="p-3 rounded-xl bg-green-100 text-green-600">
-                    <MessageSquare className="size-6" />
+                  <div className="p-4 rounded-xl bg-gradient-to-br from-green-100 to-blue-100 text-green-600">
+                    <MessageSquare className="size-7" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold mb-2" style={{ fontFamily: 'Gloria Hallelujah, Patrick Hand, system-ui' }}>
-                      Study Groups Made Easy
+                    <h3 className="text-lg font-semibold mb-2 text-green-800" style={{ fontFamily: 'Gloria Hallelujah, Patrick Hand, system-ui' }}>
+                      📚 Smart Study Groups
                     </h3>
-                    <p className="text-zinc-700 text-sm leading-relaxed" style={{ fontFamily: 'Patrick Hand, system-ui' }}>
-                      Find study buddies for that impossible math class or start your own group. Learning together is better.
+                    <p className="text-green-700 text-sm leading-relaxed mb-3" style={{ fontFamily: 'Patrick Hand, system-ui' }}>
+                      Find study buddies for that impossible math class! Plus, create custom study group types, 
+                      integrate with your LMS, or build your own matching system.
                     </p>
+                    <div className="flex flex-wrap gap-1">
+                      <span className="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">
+                        Custom Group Types
+                      </span>
+                      <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">
+                        LMS Integration
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div className="group relative p-6 rounded-2xl bg-white border border-zinc-200 shadow-sm hover:shadow-md transition-all">
-                <div className="absolute -top-2 -right-2 w-8 h-8 bg-blue-300/70 rounded-full rotate-6" />
+              <div className="group relative p-6 rounded-2xl bg-gradient-to-br from-purple-50 to-pink-50 border-2 border-purple-200 shadow-lg hover:shadow-xl transition-all">
+                <div className="absolute -top-3 -right-3 w-10 h-10 bg-gradient-to-br from-purple-300 to-pink-300 rounded-full rotate-12" />
                 <div className="flex items-start gap-4">
-                  <div className="p-3 rounded-xl bg-purple-100 text-purple-600">
-                    <BookOpen className="size-6" />
+                  <div className="p-4 rounded-xl bg-gradient-to-br from-purple-100 to-pink-100 text-purple-600">
+                    <BookOpen className="size-7" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold mb-2" style={{ fontFamily: 'Gloria Hallelujah, Patrick Hand, system-ui' }}>
-                      Campus Events
+                    <h3 className="text-lg font-semibold mb-2 text-purple-800" style={{ fontFamily: 'Gloria Hallelujah, Patrick Hand, system-ui' }}>
+                      🎉 Custom Campus Events
                     </h3>
-                    <p className="text-zinc-700 text-sm leading-relaxed" style={{ fontFamily: 'Patrick Hand, system-ui' }}>
-                      Never miss another campus event. From parties to career fairs, stay in the loop with what's happening.
+                    <p className="text-purple-700 text-sm leading-relaxed mb-3" style={{ fontFamily: 'Patrick Hand, system-ui' }}>
+                      Never miss another campus event! But here's the cool part - you can create custom event types, 
+                      integrate with your school's calendar, or build your own event matching system.
                     </p>
+                    <div className="flex flex-wrap gap-1">
+                      <span className="px-2 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-medium">
+                        Custom Event Types
+                      </span>
+                      <span className="px-2 py-1 bg-pink-100 text-pink-700 rounded-full text-xs font-medium">
+                        Calendar Integration
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div className="group relative p-6 rounded-2xl bg-white border border-zinc-200 shadow-sm hover:shadow-md transition-all">
-                <div className="absolute -top-2 -right-2 w-8 h-8 bg-green-300/70 rounded-full -rotate-6" />
+              <div className="group relative p-6 rounded-2xl bg-gradient-to-br from-orange-50 to-yellow-50 border-2 border-orange-200 shadow-lg hover:shadow-xl transition-all">
+                <div className="absolute -top-3 -right-3 w-10 h-10 bg-gradient-to-br from-orange-300 to-yellow-300 rounded-full -rotate-12" />
                 <div className="flex items-start gap-4">
-                  <div className="p-3 rounded-xl bg-orange-100 text-orange-600">
-                    <Coffee className="size-6" />
+                  <div className="p-4 rounded-xl bg-gradient-to-br from-orange-100 to-yellow-100 text-orange-600">
+                    <Coffee className="size-7" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold mb-2" style={{ fontFamily: 'Gloria Hallelujah, Patrick Hand, system-ui' }}>
-                      Coffee Meetups
+                    <h3 className="text-lg font-semibold mb-2 text-orange-800" style={{ fontFamily: 'Gloria Hallelujah, Patrick Hand, system-ui' }}>
+                      ☕ Smart Meetups
                     </h3>
-                    <p className="text-zinc-700 text-sm leading-relaxed" style={{ fontFamily: 'Patrick Hand, system-ui' }}>
-                      Grab coffee with someone new. Our algorithm matches you with people who share your interests.
+                    <p className="text-orange-700 text-sm leading-relaxed mb-3" style={{ fontFamily: 'Patrick Hand, system-ui' }}>
+                      Grab coffee with someone new! But make it yours - customize the matching algorithm, 
+                      add your own meetup types, or integrate with your campus coffee shops.
                     </p>
+                    <div className="flex flex-wrap gap-1">
+                      <span className="px-2 py-1 bg-orange-100 text-orange-700 rounded-full text-xs font-medium">
+                        Custom Matching
+                      </span>
+                      <span className="px-2 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-medium">
+                        Venue Integration
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -443,22 +620,55 @@ export default function CampusLanding() {
                 </div>
               </div>
 
-              <div className="group relative p-6 rounded-2xl bg-white border border-zinc-200 shadow-sm hover:shadow-md transition-all">
-                <div className="absolute -top-2 -right-2 w-8 h-8 bg-yellow-300/70 rounded-full -rotate-12" />
-                <div className="flex items-start gap-4">
-                  <div className="p-3 rounded-xl bg-indigo-100 text-indigo-600">
-                    <Zap className="size-6" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold mb-2" style={{ fontFamily: 'Gloria Hallelujah, Patrick Hand, system-ui' }}>
-                      Lightning Fast
-                    </h3>
-                    <p className="text-zinc-700 text-sm leading-relaxed" style={{ fontFamily: 'Patrick Hand, system-ui' }}>
-                      No more waiting for apps to load. CampusConnect is built for speed and simplicity.
-                    </p>
-                  </div>
-                </div>
-              </div>
+               <div className="group relative p-6 rounded-2xl bg-white border border-zinc-200 shadow-sm hover:shadow-md transition-all">
+                 <div className="absolute -top-2 -right-2 w-8 h-8 bg-yellow-300/70 rounded-full -rotate-12" />
+                 <div className="flex items-start gap-4">
+                   <div className="p-3 rounded-xl bg-indigo-100 text-indigo-600">
+                     <Zap className="size-6" />
+                   </div>
+                   <div>
+                     <h3 className="text-lg font-semibold mb-2" style={{ fontFamily: 'Gloria Hallelujah, Patrick Hand, system-ui' }}>
+                       Lightning Fast
+                     </h3>
+                     <p className="text-zinc-700 text-sm leading-relaxed" style={{ fontFamily: 'Patrick Hand, system-ui' }}>
+                       No more waiting for apps to load. CampusConnect is built for speed and simplicity.
+                     </p>
+                   </div>
+                 </div>
+               </div>
+
+               {/* Special Feature - Add Your Own */}
+               <div className="group relative p-6 rounded-2xl bg-gradient-to-br from-purple-50 to-blue-50 border-2 border-purple-200 shadow-lg hover:shadow-xl transition-all md:col-span-2 lg:col-span-3">
+                 <div className="absolute -top-3 -right-3 w-12 h-12 bg-gradient-to-br from-purple-300 to-blue-300 rounded-full rotate-12" />
+                 <div className="flex items-start gap-4">
+                   <div className="p-4 rounded-xl bg-gradient-to-br from-purple-100 to-blue-100 text-purple-600">
+                     <Wrench className="size-8" />
+                   </div>
+                   <div className="flex-1">
+                     <h3 className="text-xl font-semibold mb-3 text-purple-800" style={{ fontFamily: 'Gloria Hallelujah, Patrick Hand, system-ui' }}>
+                       🚀 Add Your Own Features
+                     </h3>
+                     <p className="text-purple-700 text-base leading-relaxed mb-4" style={{ fontFamily: 'Patrick Hand, system-ui' }}>
+                       This is what makes us different! Build custom features for your campus through code or our visual app builder. 
+                       Add study group matching, custom events, integration with your school's systems, or anything else you can imagine.
+                     </p>
+                     <div className="flex flex-wrap gap-2">
+                       <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-medium">
+                         Code with React/Node.js
+                       </span>
+                       <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">
+                         Visual App Builder
+                       </span>
+                       <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">
+                         API Integrations
+                       </span>
+                       <span className="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-xs font-medium">
+                         Custom Themes
+                       </span>
+                     </div>
+                   </div>
+                 </div>
+               </div>
             </div>
           </div>
         </section>
@@ -603,16 +813,29 @@ export default function CampusLanding() {
                 icon={<Building2 className="size-5" />}
                 title="Add your university / Search the list"
                 desc="Join or discover campuses on our main website. Get instant access to feed, events, and more."
-                href="#main-site"
+                href="https://staging-campus-gram-mvp-ei9i.frontend.encr.app/feed"
                 cta="Go to main website"
               />
               <OptionCard
                 icon={<Wrench className="size-5" />}
                 title="Customize your own version"
                 desc="Self-host, theme, and extend. Read our GitBook to ship your own Campus instance."
-                href="#gitbook"
+                href="https://adhiraj-and-co.gitbook.io/campusgram/"
                 cta="Read GitBook docs"
               />
+            </div>
+
+            {/* Pros and Cons Button */}
+            <div className="text-center mt-8">
+              <button
+                onClick={() => setShowProsCons(true)}
+                className="group inline-flex items-center gap-2 px-6 py-3 bg-zinc-900 text-white rounded-2xl font-medium hover:bg-zinc-800 transition-all shadow-lg hover:shadow-xl"
+                style={{ fontFamily: 'Patrick Hand, system-ui' }}
+              >
+                <span className="text-lg">🤔</span>
+                Unsure what to choose?
+                <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+              </button>
             </div>
           </div>
         </section>
@@ -620,7 +843,7 @@ export default function CampusLanding() {
         {/* GITHUB 70% viewport CTA */}
         <section className="relative h-[70vh] flex items-center justify-center border-t border-zinc-200">
           <a
-            href="https://github.com/your-org/your-repo" // TODO: replace with real repo
+            href="https://github.com/adhirajgupta/campus-gram" // TODO: replace with real repo
             className="group relative block w-full h-full"
           >
             <div className="absolute inset-0 grid place-items-center">
@@ -635,6 +858,14 @@ export default function CampusLanding() {
         {/* Footer (ultra minimal) */}
         <footer className="py-10 text-center text-xs text-zinc-600" style={{ fontFamily: 'Patrick Hand, system-ui' }}>© {new Date().getFullYear()} CampusConnect. All rights reserved.</footer>
       </div>
+
+      {/* Pros and Cons Modal */}
+      <AnimatePresence>
+        <ProsConsModal 
+          isOpen={showProsCons} 
+          onClose={() => setShowProsCons(false)} 
+        />
+      </AnimatePresence>
     </>
   );
 }
